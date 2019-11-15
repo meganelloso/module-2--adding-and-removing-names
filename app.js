@@ -13,6 +13,11 @@ form.addEventListener('submit', (e) => {
     invitedList.appendChild(li);
     submit.value = '';
 
-
+    const label = document.createElement('label');
+    label.textContent = 'Confirmed';
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    label.appendChild(checkbox);
+    li.appendChild(label);
 });
 
