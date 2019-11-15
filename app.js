@@ -21,3 +21,17 @@ form.addEventListener('submit', (e) => {
     li.appendChild(label);
 });
 
+invitedList.addEventListener('change', (e) => {
+    const checkbox = e.target; //get checked in checkbox inside ul
+    const checked = checkbox.checked;
+    const listItem = checkbox.parentNode.parentNode; //to effect the class on li when checked
+
+    if(checked) {
+        listItem.className = 'responded';
+    } else {
+        listItem.className = '';
+    }
+
+
+
+});
