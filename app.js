@@ -75,42 +75,37 @@ invitedList.addEventListener('change', (e) => {
 
 });
 
-// const editSaveButton = (remove, replace, btnName) => {
-//     const remove = li.firstElementChild;
-//     const text = span.textContent;
-//     const input = document.createElement('INPUT');
-//     input.type = "text";
-//     input.value = text;
-//     li.insertBefore(input,span); //remove span on its original place
-//     li.removeChild(span); //so we cant see the span anymore
-//     button.textContent = 'Save';
-// }
-
 invitedList.addEventListener('click', (e) => {
+
     if(e.target.tagName == "BUTTON") {
         const button = e.target;
         const li = e.target.parentNode;
         const ul = li.parentNode;
-        if(e.target.textContent == 'Remove') {    
-            ul.removeChild(li);
-        } else if (e.target.textContent == 'Edit') {
-            const span = li.firstElementChild;
-            const text = span.textContent;
-            const input = document.createElement('INPUT');
-            input.type = "text";
-            input.value = text;
-            li.insertBefore(input,span); //remove span on its original place
-            li.removeChild(span); //so we cant see the span anymore
-            button.textContent = 'Save';
-        } else if (e.target.textContent == 'Save') {
-            const input = li.firstElementChild;
-            const span = document.createElement('span');
-            span.textContent = input.value;
-            li.insertBefore(span,input);
-            li.removeChild(input);
-
-            button.textContent = 'Edit';
-        }
-
+        const actions = button.textContent;
+        const nameActions = {
+            Remove: () => {
+                ul.removeChild(li);
+            },
+            Edit: () => {
+                const span = li.firstElementChild;
+                const text = span.textContent;
+                const input = document.createElement('input');
+                input.type = "text";
+                input.value = text;
+                li.insertBefore(input,span); //remove span on its original place
+                li.removeChild(span); //so we cant see the span anymore
+                button.textContent = 'Save'; 
+            },
+            Save: () => {
+                const input = li.firstElementChild;
+                const span = document.createElement('span');
+                span.textContent = input.value;
+                li.insertBefore(span,input);
+                li.removeChild(input);
+    
+                button.textContent = 'Edit';
+            }
+        };
+        nameActions[actions]();
     }
 });
