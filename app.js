@@ -25,32 +25,34 @@ filterRespondents.addEventListener('change', (e) => {
     }
 });
 
+
 const createLi = (inputName) => {
 
     const li = document.createElement('li');
     li.innerHTML = `<span> ${inputName} </span>`; //or .innerHTML for with html elements
+    
+    function addElement(elementName, property, value) {
+        const element = document.createElement(`${elementName}`);
+        element[property] = value;
+        return element;
+    }
 
-    //add checkbox every input
-    const label = document.createElement('label');
-    label.textContent = 'Confirmed';
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    label.appendChild(checkbox);
-    li.appendChild(label);
+    function appendToLI(elementName, property, value) {
+        const element = addElement(elementName, property, value);
+        li.appendChild(element);
+        return element;
+    }
 
+    //add checkbox and label every input
+    appendToLI('label','textContent','Confirmed').appendChild(addElement('input','type','checkbox'));
     //add edit button
-    const editButton = document.createElement('button');
-    editButton.textContent = 'Edit';
-    li.appendChild(editButton);
-
+    appendToLI('button','textContent','Edit');
     //add remove button every input
-    const removeButton = document.createElement('button');
-    removeButton.textContent = 'Remove';
-    li.appendChild(removeButton);
-
+    appendToLI('button','textContent','Remove');
 
     return li;
 }
+
 form.addEventListener('submit', (e) => {
     e.preventDefault(); //to cancel the default action of html form (loads after submit)
     const li = createLi(submit.value);
@@ -72,6 +74,17 @@ invitedList.addEventListener('change', (e) => {
     }
 
 });
+
+// const editSaveButton = (remove, replace, btnName) => {
+//     const remove = li.firstElementChild;
+//     const text = span.textContent;
+//     const input = document.createElement('INPUT');
+//     input.type = "text";
+//     input.value = text;
+//     li.insertBefore(input,span); //remove span on its original place
+//     li.removeChild(span); //so we cant see the span anymore
+//     button.textContent = 'Save';
+// }
 
 invitedList.addEventListener('click', (e) => {
     if(e.target.tagName == "BUTTON") {
