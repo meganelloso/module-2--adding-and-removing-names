@@ -4,11 +4,31 @@ const invitedList = document.getElementById('invitedList');
 const containerList = invitedList.parentNode;
 const li = document.getElementsByTagName('li');
 
+const filterRespondents = document.getElementById('main-check-respondents');
+
+filterRespondents.addEventListener('change', (e) => {
+    const isChecked = e.target.checked;
+    if(isChecked) {
+        const li = invitedList.children; //array
+        
+        for(let i = 0; i < li.length; i++) {
+            if(li.className == "responded"){
+                li.style.display = '';
+            } else {
+                li.style.display = 'none'; //ERROR HERE
+            }
+        }
+    } else {
+        for(let i = 0; i < li.length; i++){
+            li.style.display = '';
+        }
+    }
+});
+
 const createLi = (inputName) => {
 
     const li = document.createElement('li');
     li.innerHTML = `<span> ${inputName} </span>`; //or .innerHTML for with html elements
-    // li.textContent = inputName;
 
     //add checkbox every input
     const label = document.createElement('label');
