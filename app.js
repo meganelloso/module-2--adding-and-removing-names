@@ -7,7 +7,8 @@ const li = document.getElementsByTagName('li');
 const createLi = (inputName) => {
 
     const li = document.createElement('li');
-    li.textContent = inputName; //or .innerHTML for with html elements
+    li.innerHTML = `<span> ${inputName} </span>`; //or .innerHTML for with html elements
+    // li.textContent = inputName;
 
     //add checkbox every input
     const label = document.createElement('label');
@@ -17,10 +18,16 @@ const createLi = (inputName) => {
     label.appendChild(checkbox);
     li.appendChild(label);
 
+    //add edit button
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    li.appendChild(editButton);
+
     //add remove button every input
     const removeButton = document.createElement('button');
     removeButton.textContent = 'Remove';
     li.appendChild(removeButton);
+
 
     return li;
 }
@@ -47,10 +54,30 @@ invitedList.addEventListener('change', (e) => {
 });
 
 invitedList.addEventListener('click', (e) => {
-    if(e.target.tagName == "BUTTON" && e.target.textContent == 'Remove') {
+    if(e.target.tagName == "BUTTON") {
+        const button = e.target;
         const li = e.target.parentNode;
         const ul = li.parentNode;
+        if(e.target.textContent == 'Remove') {    
+            ul.removeChild(li);
+        } else if (e.target.textContent == 'Edit') {
+            const span = li.firstElementChild;
+            const text = span.textContent;
+            const input = document.createElement('INPUT');
+            input.type = "text";
+            input.value = text;
+            li.insertBefore(input,span); //remove span on its original place
+            li.removeChild(span); //so we cant see the span anymore
+            button.textContent = 'Save';
+        } else if (e.target.textContent == 'Save') {
+            const input = li.firstElementChild;
+            const span = document.createElement('span');
+            span.textContent = input.value;
+            li.insertBefore(span,input);
+            li.removeChild(input);
 
-        ul.removeChild(li);
+            button.textContent = 'Edit';
+        }
+
     }
 });
