@@ -29,7 +29,7 @@ mainDiv.addEventListener('change', (e) => {
             if(lis.className == "responded"){
                 lis.style.display = '';
             } else {
-                lis.style.display = 'none'; //ERROR HERE
+                lis.style.display = 'none';
             }
         }
     } else {
