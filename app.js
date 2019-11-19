@@ -3,11 +3,24 @@ const submit = form.querySelector('input');
 const invitedList = document.getElementById('invitedList');
 const containerList = invitedList.parentNode;
 const li = document.getElementsByTagName('li');
+const mainDiv = document.querySelector('.main');
 
-const filterRespondents = document.getElementById('main-check-respondents');
+function createElement(elem) {
+    const element = document.createElement(elem);
+    return element;
+}
+const filterCheckbox = createElement('div');
+const label = createElement('label');
+const inputCheckbox = createElement('input');
+inputCheckbox.type = 'checkbox';
 
-filterRespondents.addEventListener('change', (e) => {
-    const isChecked = e.target.checked;
+label.textContent = "Filter for those who responded";
+filterCheckbox.appendChild(label);
+filterCheckbox.appendChild(inputCheckbox);
+mainDiv.insertBefore(filterCheckbox,invitedList);
+
+mainDiv.addEventListener('change', (e) => {
+    const isChecked = e.target;
     if(isChecked) {
         const li = invitedList.children; //array
         
