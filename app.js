@@ -20,15 +20,16 @@ filterCheckbox.appendChild(inputCheckbox);
 mainDiv.insertBefore(filterCheckbox,invitedList);
 
 mainDiv.addEventListener('change', (e) => {
-    const isChecked = e.target;
+    const isChecked = e.target.checked;
     if(isChecked) {
         const li = invitedList.children; //array
         
         for(let i = 0; i < li.length; i++) {
-            if(li.className == "responded"){
-                li.style.display = '';
+            let lis = li[i];
+            if(lis.className == "responded"){
+                lis.style.display = '';
             } else {
-                li.style.display = 'none'; //ERROR HERE
+                lis.style.display = 'none'; //ERROR HERE
             }
         }
     } else {
